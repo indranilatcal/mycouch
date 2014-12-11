@@ -44,5 +44,6 @@ namespace MyCouch.Querying
         public int? GroupLevel { get; set; }
         public IDictionary<string, object> AdditionalQueryParameters { get; set; }
         public bool HasAdditionalQueryParameters { get { return AdditionalQueryParameters != null && AdditionalQueryParameters.Any(); } }
+        public string ContentType { get; set; }
     }
 }

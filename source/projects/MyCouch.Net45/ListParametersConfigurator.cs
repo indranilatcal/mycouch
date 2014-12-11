@@ -314,5 +314,14 @@ namespace MyCouch
 
             return this;
         }
+
+        public virtual ListParametersConfigurator ContentType(string contentType)
+        {
+            Ensure.That(contentType, "contentType").IsNotNullOrWhiteSpace();
+
+            Parameters.ContentType = contentType;
+
+            return this;
+        }
     }
 }

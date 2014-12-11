@@ -72,5 +72,17 @@ namespace MyCouch.IntegrationTests.CoreTests
             var transformedArtists = DbClient.Entities.Serializer.Deserialize<dynamic[]>(response.Content);
             transformedArtists.Length.Should().Be(3);
         }
+
+        [MyFact(TestScenarios.ListsContext)]
+        public void Can_transform_to_html()
+        {
+            var query = new QueryListRequest(ClientTestData.Views.TransformToHtmlListId,
+                ClientTestData.Views.ArtistsNameAsKeyAndDocAsValueId.Name).Configure(q => q.ContentType(HttpContentTypes.Html));
+
+            var queryResp = SUT.QueryAsync(query).Result;
+
+            queryResp.Should().BeSuccessfulGet();
+            queryResp.ContentType.Should().Contain(HttpContentTypes.Html);
+        }
     }
 }

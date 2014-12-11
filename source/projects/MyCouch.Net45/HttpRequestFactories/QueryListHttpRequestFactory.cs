@@ -28,6 +28,8 @@ namespace MyCouch.HttpRequestFactories
                 ? new HttpRequest(HttpMethod.Post, GenerateRelativeUrl(request)).SetJsonContent(GenerateRequestBody(request))
                 : new HttpRequest(HttpMethod.Get, GenerateRelativeUrl(request));
 
+            if(!string.IsNullOrWhiteSpace(request.ContentType))
+                httpRequest.SetAcceptHeader(request.ContentType);
             httpRequest.SetRequestTypeHeader(request.GetType());
 
             return httpRequest;

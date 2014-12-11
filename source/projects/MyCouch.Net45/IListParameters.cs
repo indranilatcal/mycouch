@@ -106,5 +106,6 @@ namespace MyCouch
 
         IDictionary<string, object> AdditionalQueryParameters { get; set; }
         bool HasAdditionalQueryParameters { get; }
+        string ContentType { get; set; }
     }
 }

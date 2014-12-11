@@ -3,6 +3,7 @@ using FluentAssertions;
 using MyCouch.Querying;
 using Xunit;
 using System.Collections.Generic;
+using MyCouch.Net;
 
 namespace MyCouch.UnitTests
 {
@@ -326,6 +327,16 @@ namespace MyCouch.UnitTests
             SUT.AdditionalQueryParameters(configuredValue);
 
             _parameters.AdditionalQueryParameters.Should().Equal(configuredValue);
+        }
+
+        [Fact]
+        public void When_config_of_ContentType_It_configures_options_ContentType()
+        {
+            var configuredValue = HttpContentTypes.Html;
+
+            SUT.ContentType(configuredValue);
+
+            _parameters.ContentType.Should().Equals(configuredValue);
         }
 
         private enum FooEnum

@@ -564,6 +564,17 @@ namespace MyCouch.UnitTests.HttpRequestFactories
                 req => req.RelativeUrl.ToTestUriFromRelative().Query.Should().Be("?include_docs=true&descending=true&reduce=true&inclusive_end=true&update_seq=true&group=true&group_level=3&stale=update_after&key=%22Key1%22&startkey=%22My%20start%20key%22&startkey_docid=My%20start%20key%20doc%20id&endkey=%22My%20end%20key%22&endkey_docid=My%20end%20key%20doc%20id&limit=10&skip=5&foo=%5B%22Key1%22%2C42%5D"));
         }
 
+        [Fact]
+        public void When_ContentType_is_assigned_it_should_be_assigned_to_request_accept_header()
+        {
+            var request = CreateRequest();
+            request.ContentType = HttpContentTypes.Html;
+
+            WithHttpRequestFor(
+                request,
+                req => req.Headers.Should().Contain("Accept", HttpContentTypes.Html));
+        }
+
         protected virtual QueryListRequest CreateRequest()
         {
             return new QueryListRequest("foodesigndoc", "barlistname", "barviewname");

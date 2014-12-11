@@ -182,6 +182,11 @@ namespace MyCouch.Requests
         }
 
         public bool HasAdditionalQueryParameters { get { return State.HasAdditionalQueryParameters; } }
+        public string ContentType
+        {
+            get { return State.ContentType; }
+            set { State.ContentType = value; }
+        }
 
         public QueryListRequest(string designDocument, string functionName, string viewName)
             : this(new ListIdentity(designDocument, functionName), viewName) { }

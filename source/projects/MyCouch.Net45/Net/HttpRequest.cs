@@ -14,7 +14,6 @@ namespace MyCouch.Net
 #endif
     public class HttpRequest
     {
-        private const string _acceptHeadersAppendFormat = "{0},{1}";
         public HttpMethod Method { get; private set; }
         public string RelativeUrl { get; private set; }
         public IDictionary<string, string> Headers { get; private set; }
@@ -28,8 +27,7 @@ namespace MyCouch.Net
 
             RelativeUrl = relativeUrl;
             Method = method;
-            Headers = new Dictionary<string, string> { { "Accept", string.Format(_acceptHeadersAppendFormat,
-                                                           HttpContentTypes.Json, HttpContentTypes.Html) } };
+            Headers = new Dictionary<string, string> { { "Accept", HttpContentTypes.Json } };
         }
 
         public virtual HttpRequest SetIfMatchHeader(string rev)
@@ -69,6 +67,13 @@ namespace MyCouch.Net
                 Headers.Add(CustomHeaders.RequestEntityType, GetRequestEntityTypeName(requestType));
 #endif
             return this;
+        }
+
+        public virtual void SetAcceptHeader(string acceptHeader)
+        {
+            Ensure.That(acceptHeader, "acceptHeader").IsNotNullOrWhiteSpace();
+
+            Headers["Accept"] = acceptHeader;
         }
 
         protected virtual string GetRequestTypeName(Type requestType)
