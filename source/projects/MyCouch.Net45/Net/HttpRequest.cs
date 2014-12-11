@@ -69,6 +69,13 @@ namespace MyCouch.Net
             return this;
         }
 
+        public virtual void SetAcceptHeader(string acceptHeader)
+        {
+            Ensure.That(acceptHeader, "acceptHeader").IsNotNullOrWhiteSpace();
+
+            Headers["Accept"] = acceptHeader;
+        }
+
         protected virtual string GetRequestTypeName(Type requestType)
         {
 #if !PCL
